@@ -11,7 +11,10 @@ public class Checkin {
     // private static final int absences = 0;
     static Scanner in = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public Checkin(String name, java.util.Date date) {
+	}
+
+	public static void main(String[] args) {
         ArrayList<Attendance> checkins = loadCheckins();
         ArrayList<Attendance> checkinTimes = checkinTime(0, null, null);
 
@@ -32,6 +35,12 @@ public class Checkin {
         System.out.print("Total Students Present: ");
         System.out.println(roll.calculateTotalPresent());
 
+        System.out.print("Total Students Tardy: ");
+        System.out.println(roll.calculateTotalTardies());
+
+        System.out.print("Total Absences: ");
+        System.out.println(roll.calculateTotalAbsences());
+
         checkins.add(roll);
 
         displayAttendanceLog(roll);
@@ -40,9 +49,9 @@ public class Checkin {
         saveCheckinTime(checkinTimes);
     }
 
-    private static int displayAttendanceLog(Attendance roll) {
+    private static void displayAttendanceLog(Attendance roll) {
         System.out.println("--- Attendance Log ---");
-        System.out.println("Total: $" + roll.calculateTotalPresent());
+        System.out.println("Total Present: " + roll.calculateTotalPresent());
         System.out.println("Name: " + roll.name);
         System.out.println("Date: " + roll.date);
         System.out.println("Students:");
@@ -124,7 +133,7 @@ public class Checkin {
         System.out.println(dateTime);
 
         boolean isBefore = dateTime.getTime() < new Date(tardies).getTime();
-        boolean isAfter = dateTime.getTime() > new Date(tardies).getTime();
+        boolean isAfter = dateTime.getTime() > new Date().getTime();
 
         if (choice == isBefore) {
             System.out.print(name + " is on time.");

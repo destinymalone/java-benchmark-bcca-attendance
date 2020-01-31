@@ -32,6 +32,9 @@ public class Checkout {
         System.out.print("Total Students Present: ");
         System.out.println(roll.calculateTotalPresent());
 
+        System.out.print("Total Students Checked Out: ");
+        System.out.println(roll.calculateTotalPartialAbsences());
+
         checkouts.add(roll);
 
         displayAttendanceLog(roll);
@@ -40,9 +43,9 @@ public class Checkout {
         saveCheckout(checkoutTimes);
     }
 
-    private static int displayAttendanceLog(Attendance roll) {
+    private static void displayAttendanceLog(Attendance roll) {
         System.out.println("--- Attendance Log ---");
-        System.out.println("Total: $" + roll.calculateTotalPresent());
+        System.out.println("Total: " + roll.calculateTotalPresent());
         System.out.println("Name: " + roll.name);
         System.out.println("Date: " + roll.date);
         System.out.println("Students:");
@@ -237,7 +240,7 @@ public class Checkout {
         return new Attendance(name, date);
     }
 
-    public static ArrayList<Attendance> loadCheckins() {
+    public static ArrayList<Attendance> loadCheckouts() {
         try {
             FileInputStream fileStream = new FileInputStream("checkout.ser");
             ObjectInputStream os = new ObjectInputStream(fileStream);
