@@ -12,11 +12,11 @@ public class Checkin {
     static Scanner in = new Scanner(System.in);
 
     public Checkin(String name, java.util.Date date) {
-	}
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         ArrayList<Attendance> checkins = loadCheckins();
-        ArrayList<Attendance> checkinTimes = checkinTime(0, null, null);
+        ArrayList<Attendance> checkinTimes = checkinTime(0, false, null);
 
         Attendance roll = startRoll();
 
@@ -127,13 +127,13 @@ public class Checkin {
         return absences;
     }
 
-    private static ArrayList<Attendance> checkinTime(long tardies, ArrayList<Attendance> name, Boolean choice) {
+    private static ArrayList<Attendance> checkinTime(long tardies, boolean choice, ArrayList<Attendance> name) {
         java.util.Date date = new java.util.Date();
         java.sql.Date dateTime = new java.sql.Date(date.getTime());
         System.out.println(dateTime);
 
         boolean isBefore = dateTime.getTime() < new Date(tardies).getTime();
-        boolean isAfter = dateTime.getTime() > new Date().getTime();
+        boolean isAfter = dateTime.getTime() > new Date(tardies).getTime();
 
         if (choice == isBefore) {
             System.out.print(name + " is on time.");
@@ -240,15 +240,15 @@ public class Checkin {
         }
     }
 
-    public static Attendance startRoll() {
+    public static <Attendance> Attendance startRoll() {
         System.out.print("Full Name: ");
         String name = in.nextLine();
         System.out.print("Date: ");
         String date = in.nextLine();
-        return new Attendance(name, date);
+        return new <Attendance>(name, date);
     }
 
-    public static ArrayList<Attendance> loadCheckins() {
+    public static <Attendance> ArrayList<Attendance> loadCheckins() {
         try {
             FileInputStream fileStream = new FileInputStream("checkin.ser");
             ObjectInputStream os = new ObjectInputStream(fileStream);

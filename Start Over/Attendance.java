@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Attendance {
+public class Attendance implements Serializable{
     String name;
     Date dateTime;
 

@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Attendance implements Serializable {
     private static final long serialVersionUID = 1L;
-    String date;
+    Date date;
     String name;
     Integer tardies;
     Integer absences;
@@ -21,9 +21,9 @@ public class Attendance implements Serializable {
     Integer pattonB;
     Integer tylerI;
 
-    public Attendance(String date, Date date2) {
+    public Attendance(Date date, String name) {
         this.date = date;
-        this.name = date2;
+        this.name = name;
         this.tardies = 0;
         this.absences = 0;
         this.partialAbsences = 0;
@@ -64,10 +64,7 @@ public class Attendance implements Serializable {
 
     }
 
-    public Attendance(String name2, Date date2) {
-	}
-
-	public Integer calculateTotalTardies() {
+    public Integer calculateTotalTardies() {
         return (tardies + angieU + christianG + dakotaN + derekS + destinyM + devinB + dylanM + gillianF + jdG + oscarG
                 + pattonB + tylerI);
     }
